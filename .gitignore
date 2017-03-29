@@ -1,0 +1,13 @@
+*.pyo
+*.pyc
+*.sublime-project
+*.sublime-workspace
+.hidden
+.directory
+sequence_inserter/forms
+docs/todo.md
+sequence-inserter-*.zip
+test.py
+sequence_inserter/cols.py
+docs/specs.md
+docs/description.html
