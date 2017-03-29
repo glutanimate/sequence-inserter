@@ -1,8 +1,8 @@
 ## Sequence Inserter Add-on for Anki
 
-Allows you to define lists and sequences which can later be referenced in your cards by using a special tag syntax.
+Allows you to define lists and sequences which can later be referenced in your cards through a special tag syntax.
 
-For instance, having defined `fruit = ["apple", "orange", "banana"]` as a collection you could reference that collection within your notes using `||set::fruit::1||`. When reviewing your cards this tag would then be randomly assigned a value drawn from the `fruit` collection, i.e.  `apple`, `orange`, or `banana` .
+For instance, having defined `fruit = ["apple", "orange", "banana"]` as a collection you could reference that collection within your notes using `||set::fruit::1||`. When reviewing your cards this tag would then be randomly assigned a value drawn from the `fruit` collection, i.e.  `apple`, `orange`, or `banana`.
 
 ### Features
 

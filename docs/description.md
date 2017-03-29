@@ -1,8 +1,8 @@
 ## Sequence Inserter Add-on for Anki
 
-Allows you to define lists and sequences which can later be referenced in your cards by using a special tag syntax.
+Allows you to define lists and sequences which can later be referenced in your cards through a special tag syntax.
 
-For instance, having defined `fruit = ["apple", "orange", "banana"]` as a collection you could reference that collection within your notes using `||set::fruit::1||`. When reviewing your cards this tag would then be randomly assigned a value drawn from the `fruit` collection, i.e.  `apple`, `orange`, or `banana` .
+For instance, having defined `fruit = ["apple", "orange", "banana"]` as a collection you could reference that collection within your notes using `||set::fruit::1||`. When reviewing your cards this tag would then be randomly assigned a value drawn from the `fruit` collection, i.e.  `apple`, `orange`, or `banana`.
 
 ### Features
 
@@ -13,7 +13,7 @@ For instance, having defined `fruit = ["apple", "orange", "banana"]` as a collec
 
 ### Usage
 
-Sequence tags can be inserted anywhere within your fields or card templates. The tag syntax is quite elaborate and explained [in a separate document]().
+Sequence tags can be inserted anywhere within your fields or card templates. The tag syntax is quite elaborate and explained [in a separate document](https://github.com/Glutanimate/sequence-inserter/blob/master/docs/description.md).
 
 You can edit `cols.py` in the add-on directory to define global item collections. This file is user-specific, so your collections will be safe across add-on updates.
 
@@ -31,6 +31,10 @@ Make sure to consult the inline documentation in `cols.py` for more information 
 
 Only the desktop releases are supported at this time. Your sequences will not be substituted on AnkiWeb or any of the mobile clients, but rather appear in their literal form.
 
+### Changelog
+
+2017-03-29 – **v0.1.0** – Initial release
+
 ### Credits and License
 
 *Sequence Inserter* is *Copyright © 2017 [Aristotelis P.](https://github.com/Glutanimate)*
@@ -39,4 +43,4 @@ This add-on was developed on a commission by [BB on the Anki support forums](htt
 
 I'm always happy for new add-on commissions. If you have an idea for an add-on or new feature please feel free to reach out to me on [Twitter](https://twitter.com/glutanimate), or at glutanimate [αt] gmail . com.
 
-Licensed under the [GNU AGPL v3](https://www.gnu.org/licenses/agpl.html).
+Licensed under the [GNU AGPL v3](https://www.gnu.org/licenses/agpl.html). The source code for this add-on is available on [GitHub](https://github.com/Glutanimate/sequence-inserter).
