@@ -37,6 +37,6 @@ Only the desktop releases are supported at this time. Your sequences will not be
 
 This add-on was developed on a commission by [BB on the Anki support forums](https://anki.tenderapp.com/discussions/add-ons/9504-100-for-add-on-developer-2). All credit for the original add-on idea goes to them.
 
-I'm always happy for new add-on commissions. If you have an idea for an add-on or new feature please feel free to reach out to me on [Twitter](https://twitter.com/glutanimate), or at glutanimate [αt] gmail . com.
+I'm always happy for new add-on commissions. If you have an idea for an add-on or new feature please feel free to reach out to me on [Twitter](https://twitter.com/glutanimate), or at <em>ankiglutanimate [αt] gmail . com</em>
 
 Licensed under the [GNU AGPL v3](https://www.gnu.org/licenses/agpl.html).
