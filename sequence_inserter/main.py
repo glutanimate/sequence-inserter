@@ -11,19 +11,44 @@ License: GNU AGPL, version 3 or later; https://www.gnu.org/licenses/agpl-3.0.en.
 
 import re
 
+from aqt.qt import *
 from aqt import mw
+from aqt.utils import shortcut
+from aqt.editor import Editor
+from aqt.addcards import AddCards
+from aqt.editcurrent import EditCurrent
 
 import anki
 from anki.collection import _Collection
 from anki.sound import stripSounds
 
 from anki.consts import *
-from anki.utils import splitFields
+from anki.utils import splitFields, isWin, isMac, json
 from anki.hooks import addHook, remHook, runFilter, wrap
+
+
+# create user collections file if it doesn't exist
+try:
+    import cols
+except ImportError:
+    import os
+    from shutil import copyfile
+    p = os.path.dirname(__file__)
+    copyfile(os.path.join(p, "cols_dflt.py"),
+        os.path.join(p, "cols.py"))
+
+# fall back to default collections if user collections
+# can't be imported (e.g.: syntax errors)
+try:
+    from .cols import buttons
+except ImportError:
+    from .cols_dflt import buttons
 
 from .parser import Parser
 
 tag_regex = r"\|\|(.*?)\|\|"
+
+
 
 def _renderQA(self, data, qfmt=None, afmt=None):
     "Returns hash of id, question, answer."
@@ -128,5 +153,97 @@ def cleanup():
     if hasattr(mw.col, "_spLast"):
         del mw.col._spLast
 
+
+###### Hooks and UI modifications #######
+
+
+def create_button(self, name, func, key=None, tip=None, size=True, text="",
+                  check=False, native=False, canDisable=True):
+    """
+    Create custom editor button and add it to our own button hbox
+    Based on neftas/supplementary-buttons
+    """
+    button = QPushButton(text)
+
+    if check:
+        button.clicked[bool].connect(func)
+    else:
+        button.clicked.connect(func)
+
+    if size:
+        button.setFixedHeight(20)
+        button.setFixedWidth(20)
+
+    if not native:
+        if self.plastiqueStyle:
+            button.setStyle(self.plastiqueStyle)
+        button.setFocusPolicy(Qt.NoFocus)
+    else:
+        button.setAutoDefault(False)
+
+    if key:
+        button.setShortcut(QKeySequence(key))
+
+    if tip:
+        button.setToolTip(shortcut(tip))
+
+    if check:
+        button.setCheckable(True)
+
+    if canDisable:
+        self._buttons[name] = button
+
+    self.seq_btnbox.addWidget(button)
+
+    return button
+
+
+def insertSequence(self, seq):
+    """Insert sequence text into current field"""
+    self.web.eval("""
+        setFormat("inserthtml",{});
+    """.format(json.dumps(seq)))
+
+def setupButtons(self):
+    """
+    Create custom button hbox and insert it below
+    default editor toolbar
+    """
+
+    parent = self.parentWindow
+
+    deck = None
+    if isinstance(parent, AddCards):
+        deck = parent.deckChooser.deck.text()
+    self.seq_btnbox = QHBoxLayout()
+
+    for btn in buttons:
+        bdeck = btn.get("deck", None)
+        if bdeck and deck and bdeck != deck:
+            continue
+        label = btn.get("label", "B")
+        shortcut = btn.get("shortcut", "")
+        descr = btn.get("description", "")
+        b = self.create_button(label,
+               lambda _, s=btn["sequence"]: self.insertSequence(s),
+               key=shortcut,
+               tip="{} ({})".format(descr, shortcut),
+               text=label,
+               check=False)
+    self.seq_btnbox.insertStretch(0, 1)
+    if not isMac:
+        self.seq_btnbox.setContentsMargins(0,0,6,0)
+        self.seq_btnbox.setSpacing(0)
+    else:
+        self.seq_btnbox.setMargin(0)
+        self.seq_btnbox.setSpacing(14)
+
+    self.outerLayout.insertLayout(1, self.seq_btnbox)
+
+
 addHook("reviewCleanup", cleanup)
 _Collection._renderQA = _renderQA
+
+Editor.insertSequence = insertSequence
+Editor.create_button = create_button
+Editor.setupButtons = wrap(Editor.setupButtons, setupButtons)

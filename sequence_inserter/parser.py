@@ -14,17 +14,6 @@ import random
 from .consts import *
 from .gens import generators
 
-
-# create user collections file if it doesn't exist
-try:
-    import cols
-except ImportError:
-    import os
-    from shutil import copyfile
-    p = os.path.dirname(__file__)
-    copyfile(os.path.join(p, "cols_dflt.py"),
-        os.path.join(p, "cols.py"))
-
 # fall back to default collections if user collections
 # can't be imported (e.g.: syntax errors)
 try:

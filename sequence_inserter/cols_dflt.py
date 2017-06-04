@@ -110,3 +110,31 @@ subsequences = {
     "S3": "rpick::colours::1",
     "PA": "set::B5::1"
 }
+
+
+########### List of Button dictionaries ###########
+#
+# List syntax:
+#
+# [{}, {}, {}]
+#
+# Dictionary syntax:
+#
+# {"label": u"rn", "description": u"Insert random number",
+#   "shortcut": "Alt+R", u"sequence": u"rset::int:1"},
+#   "deck": u"Fruit"
+#
+# The "deck" key optionally restricts the display of the
+# button to specific decks. Leave it out to define a 
+# global button.
+
+
+buttons = [
+    {"label": u"rn", "description": u"Insert random number", 
+        "shortcut": u"Alt+R", "sequence": u"||rset::int:1||",},
+    {"label": u"ra", "description": u"Insert random letter", 
+        "shortcut": u"Alt+A", "sequence": u"||rset::abc:1||"},
+    {"label": u"rf", "description": u"Insert random fruit", 
+        "shortcut": u"Alt+F", "sequence": u"||rset::fruit:1||",
+        "deck": u"Fruit"},
+]
