@@ -230,11 +230,12 @@ def setupButtons(self):
         label = btn.get("label", "B")
         shortcut = btn.get("shortcut", "")
         descr = btn.get("description", "")
+        size = btn.get("restrictsize", True)
         b = self.create_button(label,
                lambda _, s=btn["sequence"]: self.insertSequence(s),
                key=shortcut,
                tip="{} ({})".format(descr, shortcut),
-               text=label,
+               text=label, size=size,
                check=False)
     self.seq_btnbox.insertStretch(0, 1)
     if not isMac:

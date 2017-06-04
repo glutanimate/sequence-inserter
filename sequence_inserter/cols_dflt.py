@@ -122,16 +122,22 @@ subsequences = {
 #
 # {"label": u"rn", "description": u"Insert random number",
 #   "shortcut": "Alt+R", u"sequence": u"rset::int:1",
-#   "deck": u"Fruit", "profile": u"User 1"}
+#   "deck": u"Fruit", "profile": u"User 1", 
+#   "restrictsize": False}
 #
 # The "deck" and "profile" keys optionally restrict the 
 # display of the button to specific decks/profiles.
 # Leave them out to define global buttons.
+#
+# By default the buttons follow the rest of the toolbar
+# icons in that they are limited to a size of 20x20px. If
+# you want to bypass that default to allow for larger 
+# labels you can set 'restrictsize' to False.
 
 
 buttons = [
     {"label": u"rn", "description": u"Insert random number", 
-        "shortcut": u"Alt+R", "sequence": u"||rset::int:1||",},
+        "shortcut": u"Alt+R", "sequence": u"||rset::int:1||"},
     {"label": u"ra", "description": u"Insert random letter", 
         "shortcut": u"Alt+A", "sequence": u"||rset::abc:1||"},
     {"label": u"rf", "description": u"Insert random fruit", 
