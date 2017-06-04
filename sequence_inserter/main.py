@@ -215,11 +215,17 @@ def setupButtons(self):
     deck = None
     if isinstance(parent, AddCards):
         deck = parent.deckChooser.deck.text()
+    
+    profile = mw.pm.name
+
     self.seq_btnbox = QHBoxLayout()
 
     for btn in buttons:
         bdeck = btn.get("deck", None)
+        bprofile = btn.get("profile", None)
         if bdeck and deck and bdeck != deck:
+            continue
+        if bprofile and profile and bprofile != profile:
             continue
         label = btn.get("label", "B")
         shortcut = btn.get("shortcut", "")

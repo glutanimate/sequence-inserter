@@ -121,12 +121,12 @@ subsequences = {
 # Dictionary syntax:
 #
 # {"label": u"rn", "description": u"Insert random number",
-#   "shortcut": "Alt+R", u"sequence": u"rset::int:1"},
-#   "deck": u"Fruit"
+#   "shortcut": "Alt+R", u"sequence": u"rset::int:1",
+#   "deck": u"Fruit", "profile": u"User 1"}
 #
-# The "deck" key optionally restricts the display of the
-# button to specific decks. Leave it out to define a 
-# global button.
+# The "deck" and "profile" keys optionally restrict the 
+# display of the button to specific decks/profiles.
+# Leave them out to define global buttons.
 
 
 buttons = [
@@ -137,4 +137,7 @@ buttons = [
     {"label": u"rf", "description": u"Insert random fruit", 
         "shortcut": u"Alt+F", "sequence": u"||rset::fruit:1||",
         "deck": u"Fruit"},
+    {"label": u"rp", "description": u"Insert random fruit", 
+        "shortcut": u"Alt+P", "sequence": u"||rset::PeriodicTable:1||",
+        "profile": u"User 2"},
 ]

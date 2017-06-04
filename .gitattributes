@@ -4,5 +4,6 @@
 docs export-ignore
 /screenshots export-ignore
 /tools export-ignore
+test.py export-ignore
 # Adjust GitHub linguist settings:
 ANKIWEB.md linguist-documentation
