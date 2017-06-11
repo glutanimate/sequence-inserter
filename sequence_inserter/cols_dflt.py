@@ -137,13 +137,13 @@ subsequences = {
 
 buttons = [
     {"label": u"rn", "description": u"Insert random number", 
-        "shortcut": u"Alt+R", "sequence": u"||rset::int:1||"},
+        "shortcut": u"Alt+R", "sequence": u"||rset::int::1||"},
     {"label": u"ra", "description": u"Insert random letter", 
-        "shortcut": u"Alt+A", "sequence": u"||rset::abc:1||"},
+        "shortcut": u"Alt+A", "sequence": u"||rset::abc::1||"},
     {"label": u"rf", "description": u"Insert random fruit", 
-        "shortcut": u"Alt+F", "sequence": u"||rset::fruit:1||",
+        "shortcut": u"Alt+F", "sequence": u"||rset::fruit::1||",
         "deck": u"Fruit"},
     {"label": u"rp", "description": u"Insert random fruit", 
-        "shortcut": u"Alt+P", "sequence": u"||rset::PeriodicTable:1||",
+        "shortcut": u"Alt+P", "sequence": u"||rset::PeriodicTable::1||",
         "profile": u"User 2"},
 ]
