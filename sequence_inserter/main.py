@@ -40,9 +40,9 @@ except ImportError:
 # fall back to default collections if user collections
 # can't be imported (e.g.: syntax errors)
 try:
-    from .cols import buttons
+    from .cols import buttons, options
 except ImportError:
-    from .cols_dflt import buttons
+    from .cols_dflt import buttons, options
 
 from .parser import Parser
 
@@ -217,9 +217,20 @@ def setupButtons(self):
         deck = parent.deckChooser.deck.text()
     
     profile = mw.pm.name
+    prof_options = options.get(profile, None)
 
+    # set up font for buttons
+    font = QApplication.font()
+    if prof_options:
+        font_family = prof_options.get("labelFont", None)
+        font_size = prof_options.get("labelSize", None)
+        if font_family:
+            font = QFont(font_family)
+        if font_size:
+            font.setPointSize(font_size)
+
+    # set up custom buttons
     self.seq_btnbox = QHBoxLayout()
-
     for btn in buttons:
         bdeck = btn.get("deck", None)
         bprofile = btn.get("profile", None)
@@ -237,6 +248,7 @@ def setupButtons(self):
                tip="{} ({})".format(descr, shortcut),
                text=label, size=size,
                check=False)
+        b.setFont(font)
     self.seq_btnbox.insertStretch(0, 1)
     if not isMac:
         self.seq_btnbox.setContentsMargins(0,0,6,0)

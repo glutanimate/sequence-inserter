@@ -17,12 +17,21 @@ License: GNU AGPL, version 3 or later; https://www.gnu.org/licenses/agpl-3.0.en.
 #--------------------------------------------------------------------------------
 #
 #
+from __future__ import unicode_literals
 from .utils import select
 #
 #
 #                 Everything below this line can be modified
 #--------------------------------------------------------------------------------
 
+########### General instructions for defining strings in Python ###########
+
+# - all strings in this file will be treated as unicode strings by default,
+#   meaning you do not have to escape non-ASCII characters or prepend your string
+#   with a 'u'
+# - strings that contain backslashes and other characters that might have a special
+#   meaning should be prepended with an 'r'. This will preven Python from swallowing
+#   certain parts of your string up (e.g. r"\ast")
 
 ###########  Individual (Sub)collections  ###########
 
@@ -51,8 +60,7 @@ PeriodicTable1 = PeriodicTable[0:10]
 
 # characters in strings can be converted to item lists by using list():
 
-rusABC = list(u"АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ")
-# (strings with non-ASCII characters need to be preceded with a "u")
+rusABC = list("АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ")
 
 # individual list items can be selected with select(list, (indexes))
 
@@ -120,9 +128,9 @@ subsequences = {
 #
 # Dictionary syntax:
 #
-# {"label": u"rn", "description": u"Insert random number",
-#   "shortcut": "Alt+R", u"sequence": u"rset::int:1",
-#   "deck": u"Fruit", "profile": u"User 1", 
+# {"label": "rn", "description": "Insert random number",
+#   "shortcut": "Alt+R", "sequence": "rset::int:1",
+#   "deck": "Fruit", "profile": "User 1", 
 #   "restrictsize": False}
 #
 # The "deck" and "profile" keys optionally restrict the 
@@ -136,14 +144,52 @@ subsequences = {
 
 
 buttons = [
-    {"label": u"rn", "description": u"Insert random number", 
-        "shortcut": u"Alt+R", "sequence": u"||rset::int::1||"},
-    {"label": u"ra", "description": u"Insert random letter", 
-        "shortcut": u"Alt+A", "sequence": u"||rset::abc::1||"},
-    {"label": u"rf", "description": u"Insert random fruit", 
-        "shortcut": u"Alt+F", "sequence": u"||rset::fruit::1||",
-        "deck": u"Fruit"},
-    {"label": u"rp", "description": u"Insert random fruit", 
-        "shortcut": u"Alt+P", "sequence": u"||rset::PeriodicTable::1||",
-        "profile": u"User 2"},
+    {"label": "rn", "description": "Insert random number", 
+        "shortcut": "Alt+R", "sequence": r"||rset::int::1||"},
+    {"label": "ra", "description": "Insert random letter", 
+        "shortcut": "Alt+A", "sequence": r"||rset::abc::1||"},
+    {"label": "rf", "description": "Insert random fruit", 
+        "shortcut": "Alt+F", "sequence": r"||rset::fruit::1||",
+        "deck": "Fruit"},
+    {"label": "rp", "description": "Insert random fruit", 
+        "shortcut": "Alt+P", "sequence": r"||rset::PeriodicTable::1||",
+        "profile": "User 2"},
+    {"label": "rp", "description": "Insert random fruit", 
+        "shortcut": "Alt+P", "sequence": r"||rset::PeriodicTable::1||",
+        "profile": "User 2"},
+    {"label": "lx", "description": "Insert LaTeX sequence", 
+        "shortcut": "Alt+L", "sequence": r"\ast",
+        "profile": "User 1"},
 ]
+
+
+########### Button options ###########
+#
+# These options govern the appearance of your custom buttons.
+# Here is an example of you how would set up two different profiles
+# to display different fonts and font sizes, respectively:
+#
+# options = {
+#     "User 1": {
+#         "labelFont": "Times New Roman",
+#         "labelSize": 12 # no quotes!
+#     },
+#     "User 2": {
+#         "labelFont": "Segoe UI Symbol",
+#         "labelSize": 14 # no quotes!
+#     },
+# }
+#
+# If a value is left empty, the add-on will fall back to Anki's
+# app-wide defaults.
+
+options = {
+    "User 1": {
+        "labelFont": "",
+        "labelSize": None # no quotes!
+    },
+    "User 2": {
+        "labelFont": "",
+        "labelSize": None # no quotes!
+    },
+}
