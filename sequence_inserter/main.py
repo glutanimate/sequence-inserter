@@ -157,7 +157,7 @@ def cleanup():
 ###### Hooks and UI modifications #######
 
 
-def create_button(self, name, func, key=None, tip=None, size=True, text="",
+def create_button(self, layout, name, func, key=None, tip=None, size=True, text="",
                   check=False, native=False, canDisable=True):
     """
     Create custom editor button and add it to our own button hbox
@@ -193,7 +193,7 @@ def create_button(self, name, func, key=None, tip=None, size=True, text="",
     if canDisable:
         self._buttons[name] = button
 
-    self.seq_btnbox.addWidget(button)
+    layout.addWidget(button)
 
     return button
 
@@ -218,6 +218,7 @@ def setupButtons(self):
     
     profile = mw.pm.name
     prof_options = options.get(profile, None)
+    prof_buttons = buttons.get(profile, {})
 
     # set up font for buttons
     font = QApplication.font()
@@ -230,34 +231,34 @@ def setupButtons(self):
             font.setPointSize(font_size)
 
     # set up custom buttons
-    self.seq_btnbox = QHBoxLayout()
-    for btn in buttons:
-        bdeck = btn.get("deck", None)
-        bprofile = btn.get("profile", None)
-        if bdeck and deck and bdeck != deck:
-            continue
-        if bprofile and profile and bprofile != profile:
-            continue
-        label = btn.get("label", "B")
-        shortcut = btn.get("shortcut", "")
-        descr = btn.get("description", "")
-        size = btn.get("restrictsize", True)
-        b = self.create_button(label,
-               lambda _, s=btn["sequence"]: self.insertSequence(s),
-               key=shortcut,
-               tip="{} ({})".format(descr, shortcut),
-               text=label, size=size,
-               check=False)
-        b.setFont(font)
-    self.seq_btnbox.insertStretch(0, 1)
-    if not isMac:
-        self.seq_btnbox.setContentsMargins(0,0,6,0)
-        self.seq_btnbox.setSpacing(0)
-    else:
-        self.seq_btnbox.setMargin(0)
-        self.seq_btnbox.setSpacing(14)
+    idx = 1
+    for row in prof_buttons:
+        bbox = QHBoxLayout()
+        for btn in row:
+            bdeck = btn.get("deck", None)
+            if bdeck and deck and bdeck != deck:
+                continue
+            label = btn.get("label", "B")
+            shortcut = btn.get("shortcut", "")
+            descr = btn.get("description", "")
+            size = btn.get("restrictsize", True)
+            b = self.create_button(bbox, label,
+                   lambda _, s=btn["sequence"]: self.insertSequence(s),
+                   key=shortcut,
+                   tip="{} ({})".format(descr, shortcut),
+                   text=label, size=size,
+                   check=False)
+            b.setFont(font)
+        bbox.insertStretch(0, 1)
+        if not isMac:
+            bbox.setContentsMargins(0,0,6,0)
+            bbox.setSpacing(0)
+        else:
+            bbox.setMargin(0)
+            bbox.setSpacing(14)
 
-    self.outerLayout.insertLayout(1, self.seq_btnbox)
+        self.outerLayout.insertLayout(idx, bbox)
+        idx += 1
 
 
 addHook("reviewCleanup", cleanup)

@@ -120,47 +120,72 @@ subsequences = {
 }
 
 
-########### List of Button dictionaries ###########
+########### Buttons dictionary ###########
 #
-# List syntax:
+# Syntax
 #
-# [{}, {}, {}]
+# General syntax:
 #
-# Dictionary syntax:
+# buttons = {
+#     "profile name 1": [
+#         [row1],
+#         [row2]
+#     ],
+#     "profile name 2": [
+#         [row1],
+#         [row2]
+#     ]
+# }
+# 
+# Row syntax:
+#
+# [
+#   {button dictionary 1},
+#   {button dictionary 2}
+# ]
+#
+# Single button dictionary syntax:
 #
 # {"label": "rn", "description": "Insert random number",
 #   "shortcut": "Alt+R", "sequence": "rset::int:1",
 #   "deck": "Fruit", "profile": "User 1", 
 #   "restrictsize": False}
 #
-# The "deck" and "profile" keys optionally restrict the 
-# display of the button to specific decks/profiles.
-# Leave them out to define global buttons.
+# The "deck" keys optionally restricts the button to 
+# specific decks.
 #
 # By default the buttons follow the rest of the toolbar
 # icons in that they are limited to a size of 20x20px. If
 # you want to bypass that default to allow for larger 
 # labels you can set 'restrictsize' to False.
 
-
-buttons = [
-    {"label": "rn", "description": "Insert random number", 
-        "shortcut": "Alt+R", "sequence": r"||rset::int::1||"},
-    {"label": "ra", "description": "Insert random letter", 
-        "shortcut": "Alt+A", "sequence": r"||rset::abc::1||"},
-    {"label": "rf", "description": "Insert random fruit", 
-        "shortcut": "Alt+F", "sequence": r"||rset::fruit::1||",
-        "deck": "Fruit"},
-    {"label": "rp", "description": "Insert random fruit", 
-        "shortcut": "Alt+P", "sequence": r"||rset::PeriodicTable::1||",
-        "profile": "User 2"},
-    {"label": "rp", "description": "Insert random fruit", 
-        "shortcut": "Alt+P", "sequence": r"||rset::PeriodicTable::1||",
-        "profile": "User 2"},
-    {"label": "lx", "description": "Insert LaTeX sequence", 
-        "shortcut": "Alt+L", "sequence": r"\ast",
-        "profile": "User 1"},
-]
+buttons = {
+    "User 1": [
+        [
+            {"label": "rn", "description": "Insert random number", 
+                "shortcut": "Alt+R", "sequence": r"||rset::int::1||"},
+            {"label": "ra", "description": "Insert random letter", 
+                "shortcut": "Alt+A", "sequence": r"||rset::abc::1||"},
+            {"label": "rf", "description": "Insert random fruit", 
+                "shortcut": "Alt+F", "sequence": r"||rset::fruit::1||",
+                "deck": "Fruit"},
+        ], # row 1
+        [
+            {"label": "*", "description": "Insert LaTeX sequence", 
+                "shortcut": "Alt+L", "sequence": r"\ast"},
+            {"label": "π", "description": "Insert LaTeX sequence", 
+                "shortcut": "Alt+P", "sequence": r"\pi"}
+        ], # row 2
+    ],
+    "User 2": [
+        [
+            {"label": "rp", "description": "Random element", 
+                "sequence": r"||rset::PeriodicTable::1||"},
+            {"label": "rp", "description": "Random element 2", 
+                "sequence": r"||rset::PeriodicTable::2||"},
+        ]  # row 1
+    ]
+}
 
 
 ########### Button options ###########
