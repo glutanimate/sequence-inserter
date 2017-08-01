@@ -161,30 +161,39 @@ subsequences = {
 
 buttons = {
     "User 1": [
-        [
-            {"label": "rn", "description": "Insert random number", 
-                "shortcut": "Alt+R", "sequence": r"||rset::int::1||"},
-            {"label": "ra", "description": "Insert random letter", 
-                "shortcut": "Alt+A", "sequence": r"||rset::abc::1||"},
-            {"label": "rf", "description": "Insert random fruit", 
-                "shortcut": "Alt+F", "sequence": r"||rset::fruit::1||",
-                "deck": "Fruit"},
-        ], # row 1
-        [
-            {"label": "*", "description": "Insert LaTeX sequence", 
-                "shortcut": "Alt+L", "sequence": r"\ast"},
-            {"label": "π", "description": "Insert LaTeX sequence", 
-                "shortcut": "Alt+P", "sequence": r"\pi"}
-        ], # row 2
+        {
+            "btn_dimensions": (40, 30),
+            "btns": [
+                {"label": "rn", "description": "Insert random number", 
+                    "shortcut": "Alt+R", "sequence": r"||rset::int::1||"},
+                {"label": "ra", "description": "Insert random letter", 
+                    "shortcut": "Alt+A", "sequence": r"||rset::abc::1||"},
+                {"label": "rf", "description": "Insert random fruit", 
+                    "shortcut": "Alt+F", "sequence": r"||rset::fruit::1||",
+                    "deck": "Fruit"},
+            ]
+        }, # row 1
+        {
+            "btn_dimensions": (50, 20),
+            "btns": [
+                {"label": "*", "description": "Insert LaTeX sequence", 
+                    "shortcut": "Alt+L", "sequence": r"\ast"},
+                {"label": "π", "description": "Insert LaTeX sequence", 
+                    "shortcut": "Alt+P", "sequence": r"\pi"},
+            ]
+        }, # row 2
     ],
     "User 2": [
-        [
-            {"label": "rp", "description": "Random element", 
-                "sequence": r"||rset::PeriodicTable::1||"},
-            {"label": "rp", "description": "Random element 2", 
-                "sequence": r"||rset::PeriodicTable::2||"},
-        ]  # row 1
-    ]
+        {
+            "btn_dimensions": (20, 20),
+            "btns": [
+                {"label": "rp", "description": "Random element", 
+                    "sequence": r"||rset::PeriodicTable::1||"},
+                {"label": "rp", "description": "Random element 2", 
+                    "sequence": r"||rset::PeriodicTable::2||"},
+            ]
+        }, # row 1
+    ],
 }
 
 

@@ -158,7 +158,7 @@ def cleanup():
 
 
 def create_button(self, layout, name, func, key=None, tip=None, size=True, text="",
-                  check=False, native=False, canDisable=True):
+                  check=False, native=False, canDisable=True, height=None, width=None):
     """
     Create custom editor button and add it to our own button hbox
     Based on neftas/supplementary-buttons
@@ -171,8 +171,8 @@ def create_button(self, layout, name, func, key=None, tip=None, size=True, text=
         button.clicked.connect(func)
 
     if size:
-        button.setFixedHeight(20)
-        button.setFixedWidth(20)
+        button.setFixedHeight(height or 20)
+        button.setFixedWidth(width or 20)
 
     if not native:
         if self.plastiqueStyle:
@@ -234,7 +234,11 @@ def setupButtons(self):
     idx = 1
     for row in prof_buttons:
         bbox = QHBoxLayout()
-        for btn in row:
+        btns = row.get("btns", None)
+        if not btns:
+            continue
+        width, height = row.get("btn_dimensions", (None, None))
+        for btn in btns:
             bdeck = btn.get("deck", None)
             if bdeck and deck and bdeck != deck:
                 continue
@@ -246,7 +250,8 @@ def setupButtons(self):
                    lambda _, s=btn["sequence"]: self.insertSequence(s),
                    key=shortcut,
                    tip="{} ({})".format(descr, shortcut),
-                   text=label, size=size,
+                   text=label,
+                   size=size, width=width, height=height,
                    check=False)
             b.setFont(font)
         bbox.insertStretch(0, 1)
