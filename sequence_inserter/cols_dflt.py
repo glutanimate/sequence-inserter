@@ -128,21 +128,24 @@ subsequences = {
 #
 # buttons = {
 #     "profile name 1": [
-#         [row1],
-#         [row2]
+#         {row1},
+#         {row2}
 #     ],
 #     "profile name 2": [
-#         [row1],
-#         [row2]
+#         {row1},
+#         {row2}
 #     ]
 # }
 # 
 # Row syntax:
 #
-# [
-#   {button dictionary 1},
-#   {button dictionary 2}
-# ]
+# {
+#   "btn_dimensions": (width, height), # row-specific btn size
+#   "btns": [ # actual buttons
+#       {button dictionary 1},
+#       {button dictionary 2}
+#   ]
+# }
 #
 # Single button dictionary syntax:
 #
@@ -154,10 +157,12 @@ subsequences = {
 # The "deck" keys optionally restricts the button to 
 # specific decks.
 #
-# By default the buttons follow the rest of the toolbar
-# icons in that they are limited to a size of 20x20px. If
-# you want to bypass that default to allow for larger 
-# labels you can set 'restrictsize' to False.
+# By default the buttons will use the specified row button
+# dimensions for their size. If no btn_dimensions are provided
+# the button size will fall back to 20x20 (Anki default).
+#
+# If you would like a button to scale dynamically to its content,
+# instead, you set the "restrictsize" button dictionary key to False.
 
 buttons = {
     "User 1": [
