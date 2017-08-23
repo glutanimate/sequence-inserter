@@ -154,15 +154,16 @@ subsequences = {
 #   "deck": "Fruit", "profile": "User 1", 
 #   "restrictsize": False}
 #
-# The "deck" keys optionally restricts the button to 
+# The "deck" key optionally restricts the button to 
 # specific decks.
 #
 # By default the buttons will use the specified row button
 # dimensions for their size. If no btn_dimensions are provided
 # the button size will fall back to 20x20 (Anki default).
 #
-# If you would like a button to scale dynamically to its content,
-# instead, you set the "restrictsize" button dictionary key to False.
+# If you would like a button to scale dynamically to its contents,
+# instead, you can set the "restrictsize" button dictionary key
+# to False.
 
 buttons = {
     "User 1": [
